@@ -4,6 +4,9 @@ import random
 def miller_rabin(n, tries):
     k = 0
     q = 0
+    if n == 1 or n == 2 or n == 3:
+        print(f'N = {n} is a prime.')
+        return
 
     Stop = True
     factor = n - 1
@@ -14,10 +17,6 @@ def miller_rabin(n, tries):
         else:
             q = int(factor)
             Stop = False
-
-    if n == 2:
-        print(f'N = 2 is always a prime.')
-        return
 
     if n % 2 == 0:
         print(f'N = {n} is even, so it is a composite number.')
@@ -34,18 +33,15 @@ def miller_rabin(n, tries):
                 x = pow(a, pow(2, i) * int(q), n)
                 if x != n - 1:
                     if i == k - 1:
-                        print(f' N = {n} is composite and a= {a} is a witness.')
+                        print(f'--> N = {n} is composite and a= {a} is a witness.')
                         return
                 else:
                     break
 
-    print(f' N = {n} is more probably is prime, after we tried with a = {notWitness}.')
+    print(f'--> N = {n} is more probably is prime, after we tried with a = {notWitness}.')
 
 
 if __name__ == '__main__':
-    # miller_rabin(N, number_of_tries)
-    miller_rabin(531, 5)
-    print("--------------------------------------------------------------------")
-    miller_rabin(313, 5)
-    print("--------------------------------------------------------------------")
-    miller_rabin(523, 5)
+    N = int(input("Enter a Number: "))
+    numberOfTries = int(input("How many time do you want to repeat the test ?  "))
+    miller_rabin(N, numberOfTries)
